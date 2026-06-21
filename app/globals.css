@@ -1,0 +1,252 @@
+@import "tailwindcss";
+
+:root {
+  /* Tema oscuro de lujo — negro profundo + acento dorado (CL Collectibles) */
+  --bg: #0a0a0b;
+  --surface: #121214;
+  --surface-2: #1a1a1d;
+  --line: rgba(255, 255, 255, 0.10);
+  --line-strong: rgba(255, 255, 255, 0.20);
+  --bone: #ededec; /* texto principal */
+  --muted: rgba(237, 237, 236, 0.58);
+  --gold: #c9a253; /* acento dorado */
+  --gold-light: #e8cd8c; /* dorado claro */
+  --gold-deep: #9a7a32;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-bone: var(--bone);
+  --color-muted: var(--muted);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-deep: var(--gold-deep);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+}
+
+html {
+  background: var(--bg);
+  color: var(--bone);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--bone);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--gold);
+  color: #0a0a0b;
+}
+
+/* Foco visible accesible (teclado) */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Display tipográfico — serif elegante (Playfair Display) */
+.display {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+.display-light {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.005em;
+}
+
+/* Eyebrow / etiqueta en mayúsculas */
+.kicker {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Acento de texto dorado con degradado */
+.text-gold-gradient {
+  background: linear-gradient(100deg, var(--gold-light), var(--gold) 45%, var(--gold-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Enlace con subrayado dorado animado */
+.link-underline {
+  position: relative;
+  transition: color 0.25s ease;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover {
+  color: var(--gold-light);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.hairline {
+  border-top: 1px solid var(--line);
+}
+
+/* Tarjeta — superficie oscura con borde sutil */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: border-color 0.4s ease, transform 0.4s ease, background 0.4s ease,
+    box-shadow 0.4s ease;
+}
+.card:hover {
+  border-color: rgba(201, 162, 83, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 26px 55px -26px rgba(0, 0, 0, 0.85);
+}
+
+/* Botón sólido — dorado */
+.btn-gold {
+  background: linear-gradient(100deg, var(--gold-light), var(--gold) 55%, var(--gold-deep));
+  color: #0a0a0b;
+  font-weight: 600;
+  transition: filter 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 30px -12px rgba(201, 162, 83, 0.5);
+}
+.btn-gold:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 10px 36px -10px rgba(201, 162, 83, 0.65);
+}
+
+/* Botón contorno dorado */
+.btn-outline {
+  border: 1px solid var(--line-strong);
+  color: var(--bone);
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold-light);
+  background: rgba(201, 162, 83, 0.06);
+}
+
+/* Botón claro — para CTAs sobre fondos con imagen */
+.btn-light {
+  background: #ffffff;
+  color: #0a0a0b;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.btn-light:hover {
+  background: #ece6d6;
+}
+.btn-outline-light {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.btn-outline-light:hover {
+  border-color: var(--gold-light);
+  color: var(--gold-light);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Listón cinético — marquee de marcas */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x var(--marquee-duration, 36s) linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Resplandor dorado de fondo */
+.gold-glow {
+  background: radial-gradient(
+    60% 60% at 50% 30%,
+    rgba(201, 162, 83, 0.18),
+    transparent 70%
+  );
+}
+
+/* Grano sutil para textura premium */
+.noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Borde dorado degradado (para tarjetas destacadas) */
+.gold-border {
+  position: relative;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(135deg, var(--gold-light), transparent 40%, transparent 60%, var(--gold-deep)) border-box;
+  border: 1px solid transparent;
+}
+
+/* Zoom lento Ken Burns para imágenes del hero */
+@keyframes ken-burns {
+  from { transform: scale(1.04); }
+  to { transform: scale(1.14); }
+}
+.ken-burns {
+  animation: ken-burns 24s ease-in-out infinite alternate;
+}
+
+/* Indicador de scroll */
+@keyframes scroll-cue {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+.scroll-cue {
+  animation: scroll-cue 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track,
+  .ken-burns,
+  .scroll-cue {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
