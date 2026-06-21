@@ -66,8 +66,14 @@ export function HeroScrollVideo() {
   }, [scrub]);
 
   return (
-    <section ref={sectionRef} className={`relative ${scrub ? "h-[220vh]" : "h-[100svh]"}`}>
-      <div className="sticky top-0 flex h-[100svh] w-full items-center overflow-hidden">
+    <section ref={sectionRef} className={`relative ${scrub ? "h-[220vh]" : "min-h-[100svh]"}`}>
+      <div
+        className={`flex w-full items-center overflow-hidden ${
+          scrub
+            ? "sticky top-0 h-[100svh]"
+            : "min-h-[100svh] pb-24 pt-28"
+        }`}
+      >
         {/* Video (se reproduce solo en loop; el scroll le añade zoom) */}
         <video
           ref={videoRef}
@@ -91,22 +97,24 @@ export function HeroScrollVideo() {
           {/* Fase 1 — titular + CTAs */}
           <div ref={titleRef} className="max-w-2xl will-change-transform">
             <p className="kicker text-gold">{t.hero.eyebrow}</p>
-            <h1 className="display mt-6 text-5xl leading-[1.04] text-white md:text-6xl xl:text-7xl">
+            <h1 className="display mt-5 text-[2rem] leading-[1.1] text-white sm:mt-6 sm:text-5xl sm:leading-[1.04] md:text-6xl xl:text-7xl">
               {t.hero.title}
             </h1>
-            <p className="mt-7 max-w-xl text-lg font-light leading-relaxed text-bone/80">
+            <p className="mt-6 max-w-xl text-base font-light leading-relaxed text-bone/80 sm:mt-7 sm:text-lg">
               {t.hero.subtitle}
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-9 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center">
               <MagneticButton
                 href="/catalogo"
-                className="btn-gold inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold"
+                wrapperClassName="w-full sm:w-auto"
+                className="btn-gold inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold sm:w-auto"
               >
                 {t.hero.ctaPrimary} <ArrowRight size={17} />
               </MagneticButton>
               <MagneticButton
                 href="/vender"
-                className="btn-outline-light inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold"
+                wrapperClassName="w-full sm:w-auto"
+                className="btn-outline-light inline-flex w-full items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold sm:w-auto"
               >
                 {t.hero.ctaSecondary}
               </MagneticButton>
@@ -127,8 +135,8 @@ export function HeroScrollVideo() {
           )}
         </div>
 
-        {/* Indicador de scroll */}
-        <div ref={cueRef} className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
+        {/* Indicador de scroll (solo desktop / modo scroll-zoom) */}
+        <div ref={cueRef} className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 md:block">
           <div className="scroll-cue flex flex-col items-center gap-2 text-bone/60">
             <span className="kicker text-[0.6rem]">{t.hero.scroll}</span>
             <span className="mx-auto mt-2 h-10 w-px bg-gradient-to-b from-gold to-transparent" />

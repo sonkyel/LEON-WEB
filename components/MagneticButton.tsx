@@ -9,12 +9,14 @@ export function MagneticButton({
   href,
   children,
   className = "",
+  wrapperClassName = "",
   external = false,
   strength = 0.35,
 }: {
   href: string;
   children: ReactNode;
   className?: string;
+  wrapperClassName?: string;
   external?: boolean;
   strength?: number;
 }) {
@@ -44,14 +46,16 @@ export function MagneticButton({
       onMouseMove={onMove}
       onMouseLeave={reset}
       style={{ x: sx, y: sy }}
-      className="inline-block"
+      className={`inline-block ${wrapperClassName}`}
     >
       {external ? (
-        <a href={href} target="_blank" rel="noopener noreferrer">
+        <a href={href} target="_blank" rel="noopener noreferrer" className="block">
           {inner}
         </a>
       ) : (
-        <Link href={href}>{inner}</Link>
+        <Link href={href} className="block">
+          {inner}
+        </Link>
       )}
     </motion.span>
   );
